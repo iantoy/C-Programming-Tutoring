@@ -33,7 +33,7 @@ int main() {
 		 * and 0 points after the decimal. "6.1" indicates that we want 6 
 		 * characters of width to be reserved for celsius and 1 point after the
 		 * decimal should be shown. */
-		printf("%3.0f %6.1f\n", fahr, celsius);	/* Print the next line */
+		printf("%3.0f %6.2f\n", fahr, celsius);	/* Print the next line */
 
 		/* This is abbreviated syntax of the previous example. */
 		fahr += step;	/* Increase fahr by the step size */

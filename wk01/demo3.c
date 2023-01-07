@@ -27,13 +27,13 @@ int main(){
 	/* Print the conversion table */
 	while (fahr <= upper) {
 		/* We call ftoc() to convert fahr to celsius and store it there */
-		celsius = ftoc(fahr);
-		printf("%3.0f %6.1f\n", fahr, celsius); /* Print the next line */
+		// celsius = ftoc(fahr);
+		// printf("%3.0f %6.1f\n", fahr, celsius); /* Print the next line */
 		
 		/** We can abstract this work further by calling print_ftoc, which does
 		 * the work of the two lines above. Try commenting out lines 29-30 and 
 		 * un-commenting out the line below. The table should print the same.*/
-		// print_ftoc(fahr); /* Print the next line of the table */
+		print_ftoc(fahr); /* Print the next line of the table */
 
 		fahr += step; /* Increment fahr by the step size. */ 
 
@@ -52,7 +52,7 @@ float ftoc(float f) { /* Here is our definition of ftoc() */
 void print_ftoc(float f){
 	float c;
 	c = (5.0/9.0) * (f - 32.0);
-	printf("%3.0f %6.1f\n", f, c); 
+	printf("%3.0f%6.1f\n", f, c); 
 } /* end print_ftoc() */
 
 

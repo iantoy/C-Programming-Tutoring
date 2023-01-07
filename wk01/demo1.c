@@ -34,7 +34,7 @@ int main() { /* This is our main function. */
 	while (fahr <= upper) { /* While farh is less than or equal to upper... */ 
 
 		/* Convert fahr to to celsius and store the result in celsius */
-		celsius = 5.0/9.0 * (fahr - 32.0);
+		celsius = 5/9.0 * (fahr - 32);
 
 		/** Here, we print the next line of the table. This print statement 
 		 * uses format specifiers and escape characters. The '%d's indicate 

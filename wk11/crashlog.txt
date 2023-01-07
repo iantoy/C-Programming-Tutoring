@@ -1,0 +1,52 @@
+Welcome to Rock Paper Scissors!
+Choose what to throw:
+1. rock
+2. paper
+3. scissors
+ERROR: Child process did not terminate normally!
+Welcome to Rock Paper Scissors!
+Choose what to throw:
+1. rock
+2. paper
+3. scissors
+You both threw the same thing!
+Choose what to throw:
+1. rock
+2. paper
+3. scissors
+Scissors beats paper, you lose!
+Would you like to play again?
+1. Yes
+2. No
+Thanks for playing, goodbye!
+Child process exited with status = 0
+Welcome to Rock Paper Scissors!
+Choose what to throw:
+1. rock
+2. paper
+3. scissors
+You both threw the same thing!
+Choose what to throw:
+1. rock
+2. paper
+3. scissors
+You both threw the same thing!
+Choose what to throw:
+1. rock
+2. paper
+3. scissors
+Rock beats scissors, you lose!
+Would you like to play again?
+1. Yes
+2. No
+Great, lets play again!
+Choose what to throw:
+1. rock
+2. paper
+3. scissors
+Paper beats rock, you win!
+Would you like to play again?
+1. Yes
+2. No
+Thanks for playing, goodbye!
+Child process exited with status = 0
