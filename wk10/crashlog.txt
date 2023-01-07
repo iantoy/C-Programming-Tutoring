@@ -1,2 +1,0 @@
-ERROR: Child process did not terminate normally!
-ERROR: Child process did not terminate normally!
