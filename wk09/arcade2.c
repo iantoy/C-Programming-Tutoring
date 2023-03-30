@@ -39,12 +39,11 @@ int main(int argc, char* argv[]) {
         int input = promptuser();       // set input with the return of promptuser    
         strcpy(mygame, setgame(input)); // pass input to setgame, return to mygame
 
-        if (strcmp(mygame, "QUIT") == 0) {  // if mygame is not "QUIT"...
-            inuse = 0;
-        } else if (strlen(mygame) > 0) {  // if mygame is not an empty string...
+        if (strlen(mygame) != 0) {      // if mygame is not an empty string...
             pid = fork();               // clone the current process with fork
             if (pid == 0) {             // if we are the child process...
-                execvp(mygame, NULL);   // Run the game chosen by the user
+                char *args[] = {};      // initialize an empty character array
+                execvp(mygame, args);   // Run the game chosen by the user
                 perror("exec");
                 exit(-1);
             } else if (pid > 0) {       // if we are the parent process ...
@@ -59,9 +58,11 @@ int main(int argc, char* argv[]) {
                 perror("fork");
                 exit(EXIT_FAILURE);
             } /* end if-else (pid) block */
-        } /* end if-else mygame != "QUIT" block*/
+        } else {    // if strlen(mygame) == 0, the user chose to quit 
+            inuse = 0;
+            printf("Thanks for playing!\n");
+        } /* end if-else strlen(mygame) != 0 block*/
     } /* end while (inuse) */
-    printf("Thanks for playing!\n");
     return 0;
 } /* end main */
 
@@ -97,7 +98,7 @@ char* setgame(int input) {
             return "./cowboy2\0";
             break;
         case QUIT:
-            return "QUIT";
+            return "";
             break;
         default:
             printf("Sorry, I didn't catch that...\n");

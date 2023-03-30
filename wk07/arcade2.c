@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
             pid = fork();               // clone the current process with fork
             if (pid == 0) {             // if we are the child process...
                 char *args[] = {};      // initialize an empty character array
-                execvp(mygame, NULL);   // Run the game chosen by the user
+                execvp(mygame, args);   // Run the game chosen by the user
                 perror("exec");
                 exit(-1);
             } else if (pid > 0) {       // if we are the parent process ...
@@ -58,6 +58,9 @@ int main(int argc, char* argv[]) {
                 perror("fork");
                 exit(EXIT_FAILURE);
             } /* end if-else (pid) block */
+        } else {    // if strlen(mygame) == 0, the user chose to quit 
+            inuse = 0;
+            printf("Thanks for playing!\n");
         } /* end if-else strlen(mygame) != 0 block*/
     } /* end while (inuse) */
     return 0;

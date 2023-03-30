@@ -9,7 +9,7 @@ struct Card {
 };
 
 /* Prototype declaration of builddeck(), which returns a Card pointer */
-struct Card* builddeck(); 
+struct Card* builddeck();
 
 int main(int argc, char* argv[]) {
 

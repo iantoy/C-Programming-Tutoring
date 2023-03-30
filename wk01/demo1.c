@@ -1,14 +1,22 @@
-/** The purpose of this program is to print a short Fahrenheit to Celsius 
- * temperature conversion table. This code is from p. 9 of The C Programming 
- * Language by Kernigan & Ritchie. 
- * */
+/**
+ * @file demo1.c
+ * @author Ian Toy (iantoy@uab.edu)
+ * @brief This program prints a short Fahrenheit to Celsius conversion table. 
+ * This code is from p. 9 of The C Programming Language by Kernigan & Ritchie.
+ * @version 0.1
+ * @date 2023-03-30
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
 
 /** This is a preprocessor command. This tells the compiler that we want to 
- * include the standard input and output header file, <stdio.h>, when we create
- * our executable, which allows our program to use the printf function. */
+ * include the functions listed in the standard input and output header file, 
+ * <stdio.h>, when we create our executable, which allows our program to use 
+ * the printf function. */
 #include <stdio.h> 
 
-int main() { /* This is our main function. */
+int main() { /* This is our main function, every C program has one. */
 
 	/** These are our variable declarations. The type of the variable must 
 	 * precede the variable name */
@@ -31,7 +39,7 @@ int main() { /* This is our main function. */
 
 	/** This is a while loop. It performs the enclosed work repeatedly until 
 	 * its condition is no longer true. */
-	while (fahr <= upper) { /* While farh is less than or equal to upper... */ 
+	while (fahr <= upper) { /* While fahr is less than or equal to upper... */ 
 
 		/* Convert fahr to to celsius and store the result in celsius */
 		celsius = 5/9.0 * (fahr - 32);
@@ -43,6 +51,5 @@ int main() { /* This is our main function. */
 		printf("%d\t%d\n", fahr, celsius);
 
 		fahr = fahr + step;	/* Increase fahr by the step size */
-
 	} /* end while (fahr <= upper) loop */
 } /* end main() */

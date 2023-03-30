@@ -26,7 +26,6 @@ int promptuser();
 char* setgame(int input);
 void sig_child(int signo);
 
-
 int main(int argc, char* argv[]) {
 
     pid_t pid;
@@ -53,6 +52,9 @@ int main(int argc, char* argv[]) {
 
     char mygame[16];
 
+    printf("getpid():\t%lu\n", getpid());
+    printf("getppid():\t%lu\n", getppid());
+
     int inuse = 1;
     while (inuse) {
         strcpy(mygame, "");      // clear mygame
@@ -63,11 +65,18 @@ int main(int argc, char* argv[]) {
             inuse = 0;
         } else if (strlen(mygame) > 0) {  // if mygame is not an empty string...
             pid = fork();               // clone the current process with fork
+            
             if (pid == 0) {             // if we are the child process...
+                printf("Hello from child!\n");
+                printf("getpid():\t%lu\n", getpid());
+                printf("getppid():\t%lu\n", getppid());
                 execvp(mygame, NULL);   // Run the game chosen by the user
                 perror("exec");
                 exit(-1);
             } else if (pid > 0) {       // if we are the parent process ...
+                printf("Hello from parent!\n");
+                printf("getpid():\t%lu\n", getpid());
+                printf("getppid():\t%lu\n", getppid());
                 wait(&status);          // wait for the child process to terminate
                 if (WIFEXITED(status)) {    // if child process terminated normally...
                     fprintf(stderr, "Child process exited with status = %d\n", WEXITSTATUS(status));

@@ -3,31 +3,30 @@
 #include <string.h> /* Give us access to strcmp() */
 
 /* Here, we have a set of simple arithmetic functions */
-float add(int a, int b) {
+float add(float a, float b) {
     return a + b;
 }
-float sub(int a, int b) {
+float sub(float a, float b) {
     return a - b;
 }
-float mult(int a, int b){
+float mult(float a, float b){
     return a * b;
 }
-float divide(int a, int b){
-    float quotient = ((1.0 * a) / (1.0 * b));
-    return quotient;
+float divide(float a, float b){
+return a / b;
 }
 
-float twospow(int e) {
-    return 1 << e;
-}
+// float twospow(int e) {
+//     return 1 << e;
+// }
 
 /* Here, main is our driver function. It expects some number of command-line
 arguments, an operation, followed by two operrands */
 int main(int argc, char* argv[]) {
 
     char* myop = argv[1]; /* localize inputs */
-    int a = atoi(argv[2]); /* use atoi() to convert char* args to ints */
-    int b = atoi(argv[3]);
+    float a = atoi(argv[2]); /* use atoi() to convert char* args to ints */
+    float b = atoi(argv[3]);
 
     /** Here, we use strcmp() to compare the given opperator with one of the 
      * following, add, sub, mult, or div. strcmp() compares two strings and 
@@ -45,8 +44,8 @@ int main(int argc, char* argv[]) {
         printf("%.2f\n", divide(a, b));    // print the quotient
     } /* end if-else block*/
 
-    if (strcmp(myop, "twospow") == 0) {
-        printf("%.2f\n", twospow(a));
-    }
+    // if (strcmp(myop, "twospow") == 0) {
+    //     printf("%.2f\n", twospow(a));
+    // }
 
 } /* end main() */

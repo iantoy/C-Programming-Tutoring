@@ -3,29 +3,28 @@
 #include <stdlib.h> /* Gives us access to atoi() */
 #include <string.h> /* Give us access to strcmp() */
 
-float add(int a, int b) {
+float add(float a, float b) {
     return a + b;
 }
-float sub(int a, int b) {
+float sub(float a, float b) {
     return a - b;
 }
-float mult(int a, int b){
+float mult(float a, float b){
     return a * b;
 }
-float divide(int a, int b){
+float divide(float a, float b){
     return a / b;
 }
 
 /* In addition to functions from the previoius example, we've added a square 
 function and an exponentiation funciton. Is there a way we can implement a 
 function that returns 2 to a given power, without using the math library? */
-float square(int a){
+float square(float a){
     return pow(a, 2);
 }
-float expt(int a, int b){
+float expt(float a, float b){
     return pow(a, b);
 }
-
 
 int main(int argc, char* argv[]) {
     /** Here is an example of error control. If argc is not equal to  4, in 
@@ -51,11 +50,11 @@ int main(int argc, char* argv[]) {
     } else if (strcmp(myop, "mult") == 0){ 
         printf("%.2f\n", mult(a, b));   // print the product
     } else if (strcmp(myop, "div") == 0){ 
-        printf("%.2f\n", div(a, b));    // print the quotient
+        printf("%.2f\n", divide(a, b));    // print the quotient
     } else if (strcmp(myop, "square") == 0){
-        printf("%.0f", square(a));      // print the number squared
+        printf("%.0f\n", square(a));      // print the number squared
     } else if (strcmp(myop, "expt") == 0){
-        printf("%.0f", expt(a, b));     // print a raised to b
+        printf("%.0f\n", expt(a, b));     // print a raised to b
     }
     // return -1;
 } /* end main() */

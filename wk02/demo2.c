@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> /* We make use of a new header file, string.h */
+// #include <string.h> /* We make use of a new header file, string.h */
+// #include <math.h>
 
 int main(int argc, char* argv[]) {
 
@@ -22,6 +23,8 @@ int main(int argc, char* argv[]) {
      * type conversion. We do this with the function atoi() from the string.h
      * header file. Conversely, the itoa() function converts ints to strings.*/
     n = atoi(argv[1]);
+    // n = pow(n, 2);
+    // n = argv[1];
     printf("n = %d\n", n);
 
     /** If we tried to make this assignment without converting, what would 
@@ -33,5 +36,5 @@ int main(int argc, char* argv[]) {
     sum = (n * (n + 1))/2;
     printf("The sum of numbers 1 to %d is %d\n", n, sum);
 
-    // return 0; 
+    return 0;
 } /* end main() */

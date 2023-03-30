@@ -1,16 +1,16 @@
 /**
- * @file arcade4.c
+ * @file arcade2.c
  * @author Ian Toy (you@domain.com)
  * @brief A commandline arcade program that runs games using fork and exec. 
- * This implementation makes use of output redirection to generate a "crashlog"
- * which stores error messages in a .txt file.
+ * This implementation makes use of two helper functions, promptuser() and
+ * setgame().
  * @version 0.1
- * @date 2022-10-24
+ * @date 2022-10-20
  * 
  * @copyright Copyright (c) 2022
+ * 
  */
 
-#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,32 +24,13 @@
 
 int promptuser();
 char* setgame(int input);
-void sig_child(int signo);
-
 
 int main(int argc, char* argv[]) {
 
     pid_t pid;
     int status;
-    int fderr;
-
-
-    /* Signal Handling */
-    if (signal(SIGINT, sig_child) == SIG_ERR) {
-        printf("Can't catch SIGINT\n");
-    }
-    if (signal(SIGTSTP, sig_child) == SIG_ERR) {
-        printf("Can't catch SIGTSTP\n");
-    }
 
     printf("Welcome to the Linux Arcade!\n");
-
-
-    /* Open standard error stream, error handling */
-    if ((fderr = open("stderr.txt", O_CREAT | O_APPEND | O_WRONLY, 0755)) == -1) {
-        printf("Error opening file stderr.txt for error\n");
-    } /* end file open error handling*/
-
     char mygame[16];
 
     int inuse = 1;
@@ -63,10 +44,6 @@ int main(int argc, char* argv[]) {
         } else if (strlen(mygame) > 0) {  // if mygame is not an empty string...
             pid = fork();               // clone the current process with fork
             if (pid == 0) {             // if we are the child process...
-
-                /* Replace the standard error stream with stderr.txt */
-                dup2(fderr, 2);
-
                 execvp(mygame, NULL);   // Run the game chosen by the user
                 perror("exec");
                 exit(-1);
@@ -127,23 +104,3 @@ char* setgame(int input) {
             break;
     } /* end switch (input) */
 } /* end setgame */
-
-/** @brief sig_child(int signo) takes in a signal number as an argument and sends a 
- * kill signal to a child process based on that input.
- *
- * @param int signo, a signal number
- */
-void sig_child(int signo) {
-	switch(signo) {
-		case SIGINT: /* Interrupt signal */
-			printf("received SIGINT signal %d\n", signo);
-			kill(getppid(), SIGINT);
-			printf("this game has been interrupted.\n");
-			break;
-		case SIGTSTP: /* Suspension signal */
-			printf("received SIGTSTP signal %d\n", signo);
-			kill(getppid(), SIGTSTP);
-			printf("this game has been suspended.\n");
-			break;
-	} /* end switch(signo) case */
-} /* end sig_child() */

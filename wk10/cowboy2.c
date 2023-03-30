@@ -39,6 +39,11 @@ int checkforwinner(PLAYER *ptr1, PLAYER *ptr2);
 
 /* MAIN DRIVER */
 int main(int argc, char* argv[]){
+
+    printf("Hello from cowboy2!\n");
+    printf("getpid():\t%lu\n", getpid());
+    printf("getppid():\t%lu\n", getppid());
+
     printf("Welcome to Cowboy!\n");
     printf("Would you like to play? (Y or N): ");
     fflush(stdout);

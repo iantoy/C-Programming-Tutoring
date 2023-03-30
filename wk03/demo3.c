@@ -8,28 +8,28 @@
  * data type, but in this program we're using it to define a type of function.
  * This type of function expects two integer arguments and returns a float.
  */
-typedef float OPERATOR(int a, int b); 
+typedef float OPERATOR(float a, float b); 
 
 /* All of these following functions satisfy the above typedef for OPERATOR */
-float add(int a, int b) {
+float add(float a, float b) {
     return a + b;
 }
-float sub(int a, int b) {
+float sub(float a, float b) {
     return a - b;
 }
-float mult(int a, int b){
+float mult(float a, float b){
     return a * b;
 }
-float divide(int a, int b){
+float divide(float a, float b){
     return a / b;
 }
 
 /* What about this function? How would calculate() handle this funciton? */
-float square(int a, int b) {
+float square(float a, float b) {
     return pow(a, 2);
 }
 /* What about this one? */
-float expt(int a, int b) {
+float expt(float a, float b) {
     return pow(a, b);
 }
 
@@ -40,7 +40,7 @@ float expt(int a, int b) {
  * is a valid input. calculate then takes this function, and calls it on its 
  * other arguments, a and b.
  */
-float calculate(int a, int b, OPERATOR *op){
+float calculate(float a, float b, OPERATOR *op){
     return op(a, b); /* Does some work based on the function passed to it */
 }
 
@@ -73,8 +73,8 @@ int main(int argc, char* argv[]) {
     
     /* Experimental Code */
     if (strcmp(myop, "square") == 0){
-        printf("%f", calculate(a, b, square));
+        printf("%.2f\n", calculate(a, b, square));
     }
     if (strcmp(myop, "expt") == 0){
-        printf("%f", calculate(a, b, expt));
+        printf("%.2f\n", calculate(a, b, expt));
     }} /* end main() */

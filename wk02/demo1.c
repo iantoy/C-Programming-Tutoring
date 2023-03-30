@@ -1,7 +1,8 @@
 #include <stdio.h>
+// #include "assignment2.h"
 
 int main(int argc, char *argv[]) {
-
+    // hello();   
     /* Here we initialize a pointer, ptr */
     int *ptr;
 
@@ -19,12 +20,12 @@ int main(int argc, char *argv[]) {
 
     /* These print statements illustrate how & where our program stores data */
     printf("The value you entered was: %d\n", n); /* Display the variable, n */
-    printf("This information is stored at the address %x\n\n", &n);
+    printf("This information is stored at the address %p\n\n", &n);
 
     /** When you see these on the console, notice how the pointer and the 
      * address of n share the same address. This is because we assigned our ptr
      * to POINT TO this location in memory. */
-    printf("The pointer pointing to n has the address %x\n", ptr);
+    printf("The pointer pointing to n has the address %p\n", ptr);
     printf("We can use this pointer to access the value at this location.\n\n");
 
     /** We can access the value at this location by DEREFERENCING ptr. This is
