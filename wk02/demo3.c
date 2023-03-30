@@ -1,34 +1,44 @@
+/**
+ * @file demo3.c
+ * @author Ian Toy (iantoy@uab.edu)
+ * @brief This version of our summing program makes use of some commandline
+ * error handling. Supplying too many arguments won't break our executable, but
+ * too few will cause a segmentation fault. Therefore, we want to prevent this
+ * from happening so our program can exit safely.
+ * @version 0.1
+ * @date 2023-03-30
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> /* We make use of a new header file, string.h */
 
 int main(int argc, char* argv[]) {
 
-    /** This version of our program makes use of COMMAND-LINE ARGUMENTS. Like 
-     * any function, main expects some perameters, argc and *argv[]. argc 
-     * indicates the number of arguments passed to the function and *argv[] is
-     * the string array of those arguments. */
-    printf("argc: %d\n", argc);
-    printf("argv[0]: %s\n", argv[0]); /* argv[0] is always the programs name */
 
-    int n, sum; /* variable declaration */
+    /** Instead of printing specific elements of argv[], this version loops 
+     * through and prints all of the commandline arguments provided. */
+    int i;
+    printf("argv[]: ");
+    for (i = 0; i < argc; i++) printf("%s ", argv[i]);
+    printf("\n");
 
-    /** Any argument given to the command line is accepted as a STRING (char*).
-     * Therefore, in these print statements, we're using the %s format 
-     * specifier. */
-    printf("argv[1]: %s\n", argv[1]); 
+    /** To avoid our program seg-faulting, we want to check that a number has 
+     * been provided. Here we check if the number of arguments is not 2 (one 
+     * for the executable name, one for the number provided). If this is the
+     * case, we will print a message to the user then exit with code -1. */
+    if (argc != 2) {
+        printf("ERROR: Incorrect number of commandline arguments provided.\n");
+        printf("Correct usage: ./demo3 <INTEGER>\n");
+        exit(-1);
+    }
 
-    /** Since were calculating a sum based on this input, we have to perform a
-     * type conversion. We do this with the function atoi() from the string.h
-     * header file. Conversely, the itoa() function converts ints to strings.*/
+    int n, sum;
     n = atoi(argv[1]);
 
-    /** If we tried to make this assignment without converting, what would 
-     * happen? Try commenting out line 23 and un-commenting out the line below
-     * and compile to see. */
-    // n = argv[1];
-
-    /* Gauss' formula */
+    /* Instead of a loop, we can use Gauss' formula to sum 1 through n. */
     sum = (n * (n + 1))/2;
     printf("The sum of numbers 1 to %d is %d\n", n, sum);
 

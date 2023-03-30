@@ -1,11 +1,24 @@
+/**
+ * @file demo1.c
+ * @author Ian Toy (iantoy@uab.edu)
+ * @brief This program is an introduction to how pointers an addressing work in
+ * C using the scanf() system library function. It also goes over pointer 
+ * syntax and dereferencing.
+ * @version 0.1
+ * @date 2023-03-30
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
 #include <stdio.h>
-// #include "assignment2.h"
 
 int main(int argc, char *argv[]) {
-    // hello();   
-    /* Here we initialize a pointer, ptr */
+    /* Here we initialize a pointer, ptr. To declare a variable as a pointer, 
+     * prepend the variable name with an asterix, "*". */
     int *ptr;
 
+    /* Declare two int variables, n and sum, and initialize their value as 0 */
     int n, sum;
     n = sum = 0;
 
@@ -15,7 +28,6 @@ int main(int argc, char *argv[]) {
     /** Here, we take a the user's input, parse it as an integer, and store it
      * at the ADDRESS (&) of n */
     scanf("%d", &n);
-
     ptr = &n; /* Now, we assign our pointer to POINT TO the address of n */
 
     /* These print statements illustrate how & where our program stores data */
@@ -34,28 +46,16 @@ int main(int argc, char *argv[]) {
      * will match the value of n printed above. */  
     printf("For example, *ptr gives us %d\n\n", *ptr);
 
-    /** Before defining our for loop, we declare our counter variable, i, then 
+    /** Here we have a for loop that sums all the numbers between 1 and n. 
+     * Before defining our for loop, we declare our counter variable, i, then 
      * initialize it to 1 in the parentheses of the loop. In newer C standards,
-     * this can be accomplished in the same line, i.e. for (int i = 0; ...). 
-     * HOWEVER, since Vulcan is a dinosaur-server, we have to adhere to C89 
-     * standards, in which this syntax is not supported. Get used this, 
-     * because when you start working, there is a good to fair chance that 
-     * you'll be working on a server or codebase older than you or I put 
-    //  * together. */
-    // int i;
-    // for (i = 1; i <= n; i++) {
-    //     sum += i;
-    // }
-
-    /* For loops that execute a sinlge line can be written like this... */
-    // int i;
-    // for (i = 1; i <= n; i++)
-        // sum += i;
-
-    /* Of course we can find the solution using Gauss' formula, written below */
-    sum = (n * (n + 1))/2;
+     * this can be accomplished in the same line, i.e. for (int i = 0; ...), 
+     * but if you're working on an older standard, keep this syntax in mind. */
+    int i;
+    for (i = 1; i <= n; i++) {
+        sum += i;
+    }
 
     printf("The sum of the numbers from 1 to %d is %d\n", n, sum);
-
 } /* end main() */
 
