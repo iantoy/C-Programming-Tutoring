@@ -1,7 +1,28 @@
+/**
+ * @file calculator2.c
+ * @author Ian Toy (iantoy@uab.edu)
+ * @brief This version of our calculator supports two new operations, a square
+ * function and an exponentiation function. It also introduces error handling 
+ * for correct commandline usage. Our program will break unless the correct 
+ * number of arguments are provided, so we add some code to deal with this.
+ * 
+ * It is important to note that since we are making use of the math system 
+ * library, we need to include the "-lm" flag when we compile with gcc.
+ * 
+ * To compile: gcc calculator.c -lm -o calculator
+
+ * 
+ * @version 0.1
+ * @date 2023-04-04
+ * 
+ * @copyright Copyright (c) 2023
+ * 
+ */
+
 #include <math.h>
 #include <stdio.h>
-#include <stdlib.h> /* Gives us access to atoi() */
-#include <string.h> /* Give us access to strcmp() */
+#include <stdlib.h>
+#include <string.h>
 
 float add(float a, float b) {
     return a + b;
@@ -15,10 +36,7 @@ float mult(float a, float b){
 float divide(float a, float b){
     return a / b;
 }
-
-/* In addition to functions from the previoius example, we've added a square 
-function and an exponentiation funciton. Is there a way we can implement a 
-function that returns 2 to a given power, without using the math library? */
+/* Here are our new functions, square() and expt(). */
 float square(float a){
     return pow(a, 2);
 }
@@ -27,14 +45,12 @@ float expt(float a, float b){
 }
 
 int main(int argc, char* argv[]) {
-    /** Here is an example of error control. If argc is not equal to  4, in 
-     * which case sufficient arguments have not been supplied, main() will
-     * print the following message to the console, then exit the program with 
-     * the given exit code -1. Having these kinds of checks in  your code can 
-     * help prevent difficult to debug errors like segmentation faults.
-     */
+    /** If argc is not equal to  4, then an incorrect number of arguments have
+     * been provided. main() will print the following message to the console,
+     * then exit the program with the given exit code -1. Having these kinds of
+     * checks in your code can prevent segmentation faults and help testing. */
     if (argc != 4) {
-        printf("ERROR: Correct usage is %s <operator> <a> <b>\n", argv[0]);
+        printf("ERROR: Correct usage is %s <operator> <int a> <int b>\n", argv[0]);
         printf("For example, %s add 1 2 \n", argv[0]);
         exit(-1);
     }
@@ -56,5 +72,4 @@ int main(int argc, char* argv[]) {
     } else if (strcmp(myop, "expt") == 0){
         printf("%.0f\n", expt(a, b));     // print a raised to b
     }
-    // return -1;
 } /* end main() */
