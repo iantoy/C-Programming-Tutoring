@@ -23,8 +23,6 @@ int main() {
 
     char name[32];
     printf("Name your Tamagotchi: ");
-    fflush(stdout);
-
     scanf("%s", name);
     printf("%s sounds like a great name!\n", name);
 
@@ -32,15 +30,14 @@ int main() {
     strcpy(mypet.name, name);
 
     int inuse = 1;  /* tracks whether or not the game is inuse */
-    char *input;
+    char input[8];
 
     while(inuse) {
         printf("\nWhat would you like to do with %s?\n", mypet.name);
         printf("(play, feed, nap, quit): ");
-        fflush(stdout);
-
         scanf("%s", input);
-        if (strcmp(input, "play") == 0) {
+
+	if (strcmp(input, "play") == 0) {
             printf("\n%s looks like they're having fun!\n", mypet.name);
             mypet.happiness++;
             mypet.hunger += 4;
