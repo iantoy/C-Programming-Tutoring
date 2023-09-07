@@ -53,7 +53,8 @@ int main(int argc, char* argv[]) {
         } else if (strlen(mygame) > 0) {  // if mygame is not an empty string...
             pid = fork();               // clone the current process with fork
             if (pid == 0) {             // if we are the child process...
-                execvp(mygame, NULL);   // Run the game chosen by the user
+                char *args[] = {};      // initialize an empty character array
+		execvp(mygame, args);   /* Run the game chosen by the user */
                 perror("exec");
                 exit(-1);
             } else if (pid > 0) {       // if we are the parent process ...

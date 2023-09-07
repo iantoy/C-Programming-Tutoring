@@ -66,9 +66,11 @@ int main(int argc, char* argv[]) {
 
                 /* Replace the standard error stream with stderr.txt */
                 dup2(fderr, 2);
-
-                execvp(mygame, NULL);   // Run the game chosen by the user
-                perror("exec");
+	
+		char *args[] = {};      // initialize an empty character array
+		execvp(mygame, args);   /* Run the game chosen by the user */
+	
+		perror("exec");
                 exit(-1);
             } else if (pid > 0) {       // if we are the parent process ...
                 wait(&status);          // wait for the child process to terminate
