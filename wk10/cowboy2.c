@@ -10,10 +10,18 @@
  * @copyright Copyright (c) 2022
  */
 
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+#include <time.h>
+
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 /* Define int variables with names representing the computer's action */
 #define SHIELD 0
@@ -39,17 +47,20 @@ int checkforwinner(PLAYER *ptr1, PLAYER *ptr2);
 
 /* MAIN DRIVER */
 int main(int argc, char* argv[]){
-
-    printf("Hello from cowboy2!\n");
-    printf("getpid():\t%lu\n", getpid());
-    printf("getppid():\t%lu\n", getppid());
-
     printf("Welcome to Cowboy!\n");
     printf("Would you like to play? (Y or N): ");
     fflush(stdout);
 
     char input;
     scanf("%c", &input);
+
+
+    int fderr;
+    /* Open standard error stream, error handling */
+    if ((fderr = open("stderr.txt", O_CREAT | O_APPEND | O_WRONLY, 0755)) == -1) {
+        printf("Error opening file stderr.txt for error\n");
+    } /* end file open error handling*/
+    dup2(fderr, 2);
 
     if ( input == 'Y' || input == 'y' ) {
         printf("Alright, lets play!\n");
@@ -66,6 +77,7 @@ int main(int argc, char* argv[]){
         /* Initialize an inuse flag and set to 1 */
         int inuse = 1;
 
+
         /* While inuse, loop through the core gameplay until a winner exists */
         while (inuse == 1) {
             setp2action(ptr2);
@@ -78,6 +90,8 @@ int main(int argc, char* argv[]){
         } /* end while(inuse) */
     } else {
         printf("Maybe another time then...\n");
+        fprintf(fderr, "Maybe another time then...\n");
+
     }
     return 0;
 } /* end main() */

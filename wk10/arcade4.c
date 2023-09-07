@@ -26,11 +26,13 @@ int promptuser();
 char* setgame(int input);
 void sig_child(int signo);
 
+
 int main(int argc, char* argv[]) {
 
     pid_t pid;
     int status;
     int fderr;
+
 
     /* Signal Handling */
     if (signal(SIGINT, sig_child) == SIG_ERR) {
@@ -42,22 +44,17 @@ int main(int argc, char* argv[]) {
 
     printf("Welcome to the Linux Arcade!\n");
 
+
     /* Open standard error stream, error handling */
-    if ((fderr = open("crashlog.txt", O_CREAT | O_APPEND | O_WRONLY, 0755)) == -1) {
-        printf("Error opening file crashlog.txt for error\n");
+    if ((fderr = open("stderr.txt", O_CREAT | O_APPEND | O_WRONLY, 0755)) == -1) {
+        printf("Error opening file stderr.txt for error\n");
     } /* end file open error handling*/
-    
-    /* Replace the standard error stream with stderr.txt */
-    dup2(fderr, STDERR_FILENO);
 
     char mygame[16];
 
-    printf("getpid():\t%lu\n", getpid());
-    printf("getppid():\t%lu\n", getppid());
-
     int inuse = 1;
     while (inuse) {
-        strcpy(mygame, "");      // clear mygame
+
         int input = promptuser();       // set input with the return of promptuser    
         strcpy(mygame, setgame(input)); // pass input to setgame, return to mygame
 
@@ -65,24 +62,24 @@ int main(int argc, char* argv[]) {
             inuse = 0;
         } else if (strlen(mygame) > 0) {  // if mygame is not an empty string...
             pid = fork();               // clone the current process with fork
-            
             if (pid == 0) {             // if we are the child process...
-                printf("Hello from child!\n");
-                printf("getpid():\t%lu\n", getpid());
-                printf("getppid():\t%lu\n", getppid());
-                execvp(mygame, NULL);   // Run the game chosen by the user
-                perror("exec");
+
+                /* Replace the standard error stream with stderr.txt */
+                dup2(fderr, 2);
+	
+		char *args[] = {};      // initialize an empty character array
+		execvp(mygame, args);   /* Run the game chosen by the user */
+	
+		perror("exec");
                 exit(-1);
             } else if (pid > 0) {       // if we are the parent process ...
-                printf("Hello from parent!\n");
-                printf("getpid():\t%lu\n", getpid());
-                printf("getppid():\t%lu\n", getppid());
                 wait(&status);          // wait for the child process to terminate
                 if (WIFEXITED(status)) {    // if child process terminated normally...
-                    fprintf(stderr, "Child process exited with status = %d\n", WEXITSTATUS(status));
+                    printf("Child process exited with status = %d\n", WEXITSTATUS(status));
                 } else {                // child process did not terminate normally
-                    fprintf(stderr, "ERROR: Child process did not terminate normally!\n");
+                    printf("ERROR: Child process did not terminate normally!\n");
                 }
+                strcpy(mygame,"");      // clear mygame
             } else {
                 perror("fork");
                 exit(EXIT_FAILURE);
