@@ -9,14 +9,13 @@
  * It is important to note that since we are making use of the math system 
  * library, we need to include the "-lm" flag when we compile with gcc.
  * 
- * To compile: gcc calculator.c -lm -o calculator
-
- * 
+ * To compile: gcc calculator2.c -lm -o calculator2
+ * To run: ./calculator2 <operator> <int a> <int b>
+ *
  * @version 0.1
  * @date 2023-04-04
  * 
  * @copyright Copyright (c) 2023
- * 
  */
 
 #include <math.h>
